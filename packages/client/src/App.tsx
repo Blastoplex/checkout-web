@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "design-system";
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -18,6 +19,7 @@ const App: React.FC = () => {
         >
           Learn React
         </a>
+        <Button>Im a button</Button>
       </header>
     </div>
   );
