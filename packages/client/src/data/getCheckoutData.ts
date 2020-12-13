@@ -9,7 +9,7 @@ type checkoutData = {
 const getCheckoutData = async (): Promise<checkoutData> => {
   // Faux load delay
   const response = await new Promise((resolve: (value: ApiData) => void) =>
-    setTimeout(() => resolve(data as ApiData), 3000)
+    setTimeout(() => resolve(data as ApiData), 2000)
   );
   return { success: true, response };
 };
