@@ -1,70 +1,74 @@
 {
-    "customers": [
-        {
-            "id": "1",
-            "name": "SecondBite"
-        }, {
-            "id": "2",
-            "name": "Axil Coffee Roasters"
-        }, {
-            "id": "3",
-            "name": "MYER"
-        }
-    ],
-    "products": [
-        {
-            "id": "CLASSIC",
-            "name": "Classic Ad",
-            "description": "Offers the most basic level of advertisement",
-            "price": 269.99
-        }, {
-            "id": "PREMIUM",
-            "name": "Premium Ad",
-            "description": "Same benefits as Standout Ad, but also puts the advertisement at the top of the results, allowing higher visibility",
-            "price": 394.99
-        }, {
-            "id": "STAND_OUT",
-            "name": "Stand out Ad",
-            "description": "Allows advertisers to use a company logo and use a longer presentation text",
-            "price": 322.99
-        }
-    ],
-    "priceDealMap": {
-        "1": [
-            {
-                "type": "BUNDLE",
-                "productId": "CLASSIC",
-                "terms": {
-                    "upper": 3,
-                    "lower": 2
-                }
-            }
-        ],
-        "2": [
-            {
-                "type": "FIXED",
-                "productId": "STAND_OUT",
-                "terms": {
-                    "price": 299.99
-                }
-            }
-        ],
-        "3": [
-            {
-                "type": "BUNDLE",
-                "productId": "STAND_OUT",
-                "terms": {
-                    "upper": 5,
-                    "lower": 4
-                }
-            },
-            {
-                "type": "FIXED",
-                "productId": "PREMIUM",
-                "terms": {
-                    "price": 389.99
-                }
-            }
-        ]
+  "customers": [
+    {
+      "id": "1",
+      "name": "SecondBite"
+    },
+    {
+      "id": "2",
+      "name": "Axil Coffee Roasters"
+    },
+    {
+      "id": "3",
+      "name": "MYER"
     }
+  ],
+  "products": [
+    {
+      "id": "CLASSIC",
+      "name": "Classic Ad",
+      "description": "Offers the most basic level of advertisement",
+      "price": 269.99
+    },
+    {
+      "id": "PREMIUM",
+      "name": "Premium Ad",
+      "description": "Same benefits as Standout Ad, but also puts the advertisement at the top of the results, allowing higher visibility",
+      "price": 394.99
+    },
+    {
+      "id": "STAND_OUT",
+      "name": "Stand out Ad",
+      "description": "Allows advertisers to use a company logo and use a longer presentation text",
+      "price": 322.99
+    }
+  ],
+  "priceDealMap": {
+    "1": [
+      {
+        "type": "BUNDLE",
+        "productId": "CLASSIC",
+        "terms": {
+          "upper": 3,
+          "lower": 2
+        }
+      }
+    ],
+    "2": [
+      {
+        "type": "FIXED",
+        "productId": "STAND_OUT",
+        "terms": {
+          "price": 299.99
+        }
+      }
+    ],
+    "3": [
+      {
+        "type": "BUNDLE",
+        "productId": "STAND_OUT",
+        "terms": {
+          "upper": 5,
+          "lower": 4
+        }
+      },
+      {
+        "type": "FIXED",
+        "productId": "PREMIUM",
+        "terms": {
+          "price": 389.99
+        }
+      }
+    ]
+  }
 }
