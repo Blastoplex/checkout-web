@@ -18,9 +18,9 @@ export type DisplayPrice = string;
 export type Price = number;
 
 export enum ProductId {
-  classic = "CLASSIC",
-  standOut = "STAND_OUT",
-  premium = "PREMIUM",
+  Classic = "CLASSIC",
+  StandOut = "STAND_OUT",
+  Premium = "PREMIUM",
 }
 
 export interface Product {

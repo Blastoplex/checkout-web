@@ -2,7 +2,7 @@ import { IndexedDiscountedProduct } from "../types";
 
 const mergeDeals = (
   existingDiscountedProducts: IndexedDiscountedProduct[],
-  newDiscountedProduct: IndexedDiscountedProduct[]
+  newDiscountedProduct: IndexedDiscountedProduct[] = []
 ): IndexedDiscountedProduct[] =>
   existingDiscountedProducts.map((existingDiscountedProduct) => {
     const newProduct = newDiscountedProduct.find(

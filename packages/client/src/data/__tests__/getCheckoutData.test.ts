@@ -1,4 +1,3 @@
-import React from "react";
 import getCheckoutData from "../getCheckoutData";
 import checkoutData from "../checkoutData.json";
 
