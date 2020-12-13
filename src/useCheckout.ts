@@ -1,9 +1,6 @@
 import { useReducer, useEffect, useState } from "react";
 import reducer, { initialState } from "./reducer/Reducer";
-import {
-  getCartForDisplay,
-  getProductsForDisplay,
-} from "./reducer/Selectors";
+import { getCartForDisplay, getProductsForDisplay } from "./reducer/Selectors";
 import getCheckoutData from "./data/getCheckoutData";
 import { AppViewProps } from "./AppView";
 import {
@@ -29,7 +26,9 @@ const useCheckout = (): AppViewProps => {
   const { customers, selectedCustomer, loading } = state;
 
   useEffect(() => {
-    if (!loading) {return;}
+    if (!loading) {
+      return;
+    }
 
     const getData = async () => {
       const { success, response } = await getCheckoutData();
