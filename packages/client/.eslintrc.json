@@ -17,5 +17,8 @@
     "react": {
       "version": "detect"
     }
+  },
+  "rules": {
+    "jsx-a11y/no-onchange": 0
   }
 }
