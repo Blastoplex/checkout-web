@@ -11,19 +11,6 @@ export const initialState: State = {
 
 const reducer = (state = initialState, action: Action): State => {
   switch (action.type) {
-    case ActionTypes.successfullyLoaded:
-      return {
-        ...state,
-        products: action.response.products,
-        customers: action.response.customers,
-        priceDealMap: action.response.priceDealMap,
-        loading: false
-      };
-
-    case ActionTypes.unsuccessfullyLoaded:
-      console.error(action.response);
-      return state;
-
     case ActionTypes.addProductToCart:
       return {
         ...state,
@@ -35,6 +22,20 @@ const reducer = (state = initialState, action: Action): State => {
         ...state,
         selectedCustomer: action.customerId,
       };
+      
+    case ActionTypes.successfullyLoaded:
+      return {
+        ...state,
+        products: action.response.products,
+        customers: action.response.customers,
+        priceDealMap: action.response.priceDealMap,
+        loading: false,
+      };
+
+    case ActionTypes.unsuccessfullyLoaded:
+      console.error(action.response);
+      return state;
+
     default:
       return state;
   }
