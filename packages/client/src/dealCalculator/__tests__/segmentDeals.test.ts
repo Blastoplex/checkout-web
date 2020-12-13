@@ -89,7 +89,7 @@ describe("segmentProducts", () => {
       const productId = ProductId.Premium;
       it("will return a empty tuple", () => {
         const actual= segmentProducts([], productId);
-        expect(actual).toEqual([]);
+        expect(actual).toEqual([[],[]]);
       });
     });
   });
