@@ -1,17 +1,24 @@
-import { DiscountedProduct, FixedDeal } from "../types";
+import { IndexedDiscountedProduct, FixedDeal } from "../types";
+import segmentProducts from "./segmentProducts";
 
-const calculateFixedDeal = (discountedCart: DiscountedProduct[], deal: FixedDeal):DiscountedProduct[] => {
-    const { productId, terms: { price }} = deal;
-    return discountedCart.map(product =>
-        (
-            product.id === productId
-            ? {
-                ...product,
-                discountedPrice: product.discountedPrice < price ? product.discountedPrice : price
-            }
-            : product
-        )
-    );
-}
+const calculateFixedDeal = (
+  discountedProducts: IndexedDiscountedProduct[],
+  deal: FixedDeal
+): IndexedDiscountedProduct[] => {
+  const {
+    terms: { price },
+  } = deal;
+  const [validProducts, invalidProducts] = segmentProducts(
+    discountedProducts,
+    deal.productId
+  );
+  return [
+    ...invalidProducts,
+    ...validProducts.map((product) => ({
+      ...product,
+      discountedPrice: price,
+    })),
+  ];
+};
 
-export default calculateFixedDeal
+export default calculateFixedDeal;

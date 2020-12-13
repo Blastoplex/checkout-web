@@ -48,6 +48,10 @@ export type DiscountedProduct = Product & {
   discountedPrice: Price;
 };
 
+export type IndexedDiscountedProduct = DiscountedProduct & {
+  index: number;
+};
+
 export type DisplayDiscountedProduct = DisplayProduct & {
   displayPrice: DisplayPrice;
   displayDiscountedPrice: DisplayPrice;

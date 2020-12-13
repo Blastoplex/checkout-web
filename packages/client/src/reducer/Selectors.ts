@@ -31,10 +31,11 @@ export const getPopulatedCartWithProducts = (
   cart: ProductId[],
   products: Product[]
 ): Product[] => {
-  return products.filter((product) =>
-    cart.some((productId) => product.id == productId)
-  );
+  return cart
+    .map((productId) => products.find((product) => product.id == productId))
+    .filter((product) => !!product) as Product[]; //Make sure to filter out any results that cant be found in products.
 };
+
 export const getCartForDisplay = (
   state: State
 ): [DisplayDiscountedProduct[], DisplayPrice] => {

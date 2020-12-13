@@ -1,28 +1,39 @@
-import { DiscountedProduct, Deal, DealType, Product } from "../types";
+import {
+  DiscountedProduct,
+  Deal,
+  DealType,
+  Product,
+  IndexedDiscountedProduct,
+} from "../types";
+import calculateFixedDeal from "./calculateFixedDeal";
 import calculateBundleDeal from "./calculateBundleDeal";
-import calculateFixedDeal from "./calculateFixedDeal"
+import mergeDeals from "./mergeDeals";
 
 const calculateProductDeal = (
   cart: Product[],
   deals: Deal[] = []
 ): DiscountedProduct[] => {
-  const discountedCart = cart.map((item) => ({
+  const discountedProducts = cart.map((item, index) => ({
+    index: index,
     ...item,
     discountedPrice: item.price,
   }));
 
-  const updatedCart = deals.reduce((acc, deal) => {
-    if (deal.type === DealType.Bundle) {
-      return calculateBundleDeal(acc, deal);
-    }
+  const consolidatedDeals = deals
+    .reduce<IndexedDiscountedProduct[][]>((acc, deal) => {
+      if (deal.type === DealType.Bundle) {
+        acc.push(calculateBundleDeal(discountedProducts, deal));
+      }
+      if (deal.type === DealType.Fixed) {
+        acc.push(calculateFixedDeal(discountedProducts, deal));
+      }
+      return acc;
+    }, [])
+    .reduce(mergeDeals, discountedProducts); // Seed with original list to ensure original order.
 
-    if (deal.type === DealType.Fixed) {
-      return calculateFixedDeal(acc, deal);
-    }
-    return acc;
-  }, discountedCart);
-
-  return updatedCart;
+  // Strip index
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return consolidatedDeals.map(({ index, ...baseProduct }) => baseProduct);
 };
 
 export default calculateProductDeal;
