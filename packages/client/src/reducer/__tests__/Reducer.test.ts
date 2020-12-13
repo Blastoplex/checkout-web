@@ -25,8 +25,14 @@ describe("reducer", () => {
       type: ActionTypes.unsuccessfullyLoaded,
       response: "error",
     };
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+
     const state = reducer(initialState, action);
     expect(state).toBe(initialState);
+    expect(spy).toHaveBeenCalled();
+
+    spy.mockRestore();
   });
   it("should handle sucessfully loaded action", () => {
     const action: Action = {
@@ -34,7 +40,7 @@ describe("reducer", () => {
       response: checkoutData as ApiData,
     };
     const state = reducer(initialState, action);
-    expect(state).toBe({
+    expect(state).toEqual({
       ...state,
       products: checkoutData.products,
       customers: checkoutData.customers,
