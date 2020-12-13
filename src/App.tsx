@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+
 import useCheckout from "./useCheckout";
 import AppView from './AppView'
 

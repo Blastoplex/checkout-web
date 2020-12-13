@@ -1,4 +1,27 @@
 import React from "react";
+// import Button from "react-bootstrap/Button";
+// import Table from "react-bootstrap/Table";
+// import Jumbotron from "react-bootstrap/Jumbotron";
+import {
+  Container,
+  Typography,
+  Box,
+  Card,
+  CardContent,
+  TextField,
+  MenuItem,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Button,
+} from "@material-ui/core";
+import Skeleton from "@material-ui/lab/Skeleton";
+
+// import Collapse from "react-bootstrap/Collapse";
+
 import {
   Customer,
   CustomerId,
@@ -21,39 +44,141 @@ export type AppViewProps = {
 
 const AppView: React.FC<AppViewProps> = (props: AppViewProps) => {
   return (
-    <div>
-      <h1>Job ad checkout</h1>
-      <label htmlFor="customer-select">Customer</label>
-      <select
-        id="customer-select"
-        value={props.selectedCustomer}
-        defaultValue={"unselected"}
-        onChange={(e) => props.updateCustomer(e.target.value)}
-      >
-        <option value="unselected" label={"No customer selected"} hidden>
-          No customer selected
-        </option>
-        {props.customers.map((customer) => (
-          <option key={customer.id} value={customer.id} label={customer.name}>
-            {customer.name}
-          </option>
-        ))}
-      </select>
-      <h2>Products</h2>
-      {props.products.map((product) => (
-        <div key={product.id}>
-          {JSON.stringify(product)}
-          <button onClick={() => props.addItemToCart(product.id)}>
-            Add to cart
-          </button>
-        </div>
-      ))}
-      <h2>Cart</h2>
-      {props.cart.map((product) => (
-        <div key={product.id}>{JSON.stringify(product)}</div>
-      ))}
-      <div> Total: {props.totalPrice}</div>
-    </div>
+    // <Jumbotron className="app">
+    <Container>
+      <Box marginY={4}>
+        <Typography variant="h2" component="h1" gutterBottom>
+          Job Ad checkout
+        </Typography>
+        {/* <p>
+          This is a simple hero unit, a simple jumbotron-style component for
+          calling extra attention to featured content or information.
+        </p>
+        <p>
+          <Button variant="primary">Learn more</Button>
+        </p> */}
+        <Card>
+          <CardContent>
+            <Box marginBottom={4}>
+              <TextField
+                id="select"
+                label="Customer"
+                onChange={(e) => props.updateCustomer(e.target.value)}
+                value={props.selectedCustomer}
+                select
+              >
+                <MenuItem value="unselected">No customer selected</MenuItem>
+                {props.loading ? (
+                  <>
+                    <MenuItem>
+                      <Box width="100%">
+                        <Skeleton />
+                      </Box>
+                    </MenuItem>
+                    <MenuItem>
+                      <Box width="100%">
+                        <Skeleton />
+                      </Box>
+                    </MenuItem>
+                  </>
+                ) : (
+                  props.customers.map((customer) => (
+                    <MenuItem key={customer.id} value={customer.id}>
+                      {customer.name}
+                    </MenuItem>
+                  ))
+                )}
+              </TextField>
+            </Box>
+            <Box marginBottom={4}>
+              <Typography variant="h4" component="h2" gutterBottom>
+                Products
+              </Typography>
+              <TableContainer>
+                <Table aria-label="Job add table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Name</TableCell>
+                      <TableCell>Description</TableCell>
+                      <TableCell>Price</TableCell>
+                      <TableCell></TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {props.loading ? (
+                      <TableRow>
+                        <TableCell>
+                          <Skeleton />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton />
+                        </TableCell>
+                        <TableCell align="right">
+                          <Button disabled>Add to cart</Button>
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      props.products.map((product) => (
+                        <TableRow key={product.id}>
+                          <TableCell>
+                            <strong>{product.name}</strong>
+                          </TableCell>
+                          <TableCell>{product.description}</TableCell>
+                          <TableCell>{product.displayPrice}</TableCell>
+                          <TableCell align="right">
+                            <Button
+                              color="primary"
+                              onClick={() => props.addItemToCart(product.id)}
+                            >
+                              Add to cart
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
+
+            {props.cart.length > 0 && (
+              <Box marginBottom={4}>
+                <Typography variant="h4" component="h2" gutterBottom>
+                  Cart
+                </Typography>
+                <TableContainer>
+                  <Table aria-label="Job add table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Name</TableCell>
+                        <TableCell>Price</TableCell>
+                        <TableCell>Discounted price</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {props.cart.map((product) => (
+                        <TableRow key={product.id}>
+                          <TableCell>
+                            <strong>{product.name}</strong>
+                          </TableCell>
+                          <TableCell>{product.displayPrice}</TableCell>
+                          <TableCell>
+                            {product.displayDiscountedPrice}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Box>
+            )}
+          </CardContent>
+        </Card>
+      </Box>
+    </Container>
   );
 };
 

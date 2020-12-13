@@ -4,7 +4,7 @@ export const initialState: State = {
   cart: [],
   products: [],
   customers: [],
-  selectedCustomer: "",
+  selectedCustomer: "unselected",
   loading: true,
   priceDealMap: {},
 };
