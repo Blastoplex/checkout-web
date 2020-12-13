@@ -1,37 +1,27 @@
+/**
+ * Customers
+ */
+
+export type CustomerId = string;
+
+export type Customer = {
+  id: CustomerId;
+  name: string;
+};
+
+/**
+ * Products
+ */
+
+export type DisplayPrice = string;
+
+export type Price = number;
+
 export enum ProductId {
   classic = "CLASSIC",
   standOut = "STAND_OUT",
   premium = "PREMIUM",
 }
-
-export enum DealType {
-  Bundle = "BUNDLE",
-  Fixed = "FIXED",
-}
-
-export interface BundleDeal{
-  type: DealType.Bundle;
-  productId: ProductId;
-  terms: {
-    upper: number;
-    lower: number;
-  };
-}
-
-export interface FixedDeal{
-  type: DealType.Fixed;
-  productId: ProductId;
-  terms: {
-    price: number;
-  };
-}
-
-export type Deal = BundleDeal | FixedDeal;
-
-
-export type DisplayPrice = string
-
-export type Price = number
 
 export interface Product {
   id: ProductId;
@@ -57,14 +47,35 @@ export type DisplayDiscountedProduct = DisplayProduct & {
   displayDiscountedPrice: DisplayPrice;
 };
 
-export type CustomerId = string;
+/**
+ * Deals
+ */
 
-export type Customer = {
-  id: CustomerId;
-  name: string;
-};
+export enum DealType {
+  Bundle = "BUNDLE",
+  Fixed = "FIXED",
+}
 
-export interface LoadResponse {
+export interface BundleDeal {
+  type: DealType.Bundle;
+  productId: ProductId;
+  terms: {
+    upper: number;
+    lower: number;
+  };
+}
+
+export interface FixedDeal {
+  type: DealType.Fixed;
+  productId: ProductId;
+  terms: {
+    price: number;
+  };
+}
+
+export type Deal = BundleDeal | FixedDeal;
+
+export interface ApiData {
   products: Product[];
   customers: Customer[];
   priceDealMap: Record<CustomerId, Deal[]>;

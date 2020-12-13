@@ -17,6 +17,7 @@ const reducer = (state = initialState, action: Action): State => {
         products: action.response.products,
         customers: action.response.customers,
         priceDealMap: action.response.priceDealMap,
+        loading: false
       };
 
     case ActionTypes.unsuccessfullyLoaded:

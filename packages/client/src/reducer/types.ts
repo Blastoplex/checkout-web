@@ -2,7 +2,7 @@ import {
   Customer,
   CustomerId,
   Deal,
-  LoadResponse,
+  ApiData,
   Product,
   ProductId,
 } from "../types";
@@ -15,7 +15,7 @@ export enum ActionTypes {
 }
 export type Action =
   | { type: ActionTypes.unsuccessfullyLoaded; response: string }
-  | { type: ActionTypes.successfullyLoaded; response: LoadResponse }
+  | { type: ActionTypes.successfullyLoaded; response: ApiData }
   | { type: ActionTypes.addProductToCart; productId: ProductId }
   | { type: ActionTypes.updateCustomer; customerId: CustomerId };
 

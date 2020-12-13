@@ -11,12 +11,12 @@ import {
   DisplayDiscountedProduct,
   DisplayPrice,
   DisplayProduct,
-  LoadResponse,
+  ApiData,
   ProductId,
 } from "./types";
 import { ActionTypes } from "./reducer/types";
 
-const useForm = (): AppViewProps => {
+const useCheckout = (): AppViewProps => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [displayProducts, updateDisplayProducts] = useState<DisplayProduct[]>(
     []
@@ -29,9 +29,7 @@ const useForm = (): AppViewProps => {
   const { customers, selectedCustomer, loading } = state;
 
   useEffect(() => {
-    if (!loading) {
-      return;
-    }
+    if (!loading) {return;}
 
     const getData = async () => {
       const { success, response } = await getCheckoutData();
@@ -43,7 +41,7 @@ const useForm = (): AppViewProps => {
       } else {
         dispatch({
           type: ActionTypes.successfullyLoaded,
-          response: response as LoadResponse,
+          response: response as ApiData,
         });
       }
     };
@@ -74,4 +72,4 @@ const useForm = (): AppViewProps => {
   };
 };
 
-export default useForm;
+export default useCheckout;
