@@ -80,3 +80,13 @@ export interface ApiData {
   customers: Customer[];
   priceDealMap: Record<CustomerId, Deal[]>;
 }
+
+export type DealTypeToDealMap = {
+  [DealType.Bundle]: BundleDeal
+  [DealType.Fixed]: FixedDeal
+}
+
+export type DiscountCalculator<T extends keyof DealTypeToDealMap> = (
+  discountedProducts: IndexedDiscountedProduct[],
+  deal: DealTypeToDealMap[T]
+) => IndexedDiscountedProduct[];

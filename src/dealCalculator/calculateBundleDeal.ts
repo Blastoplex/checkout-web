@@ -1,4 +1,9 @@
-import { BundleDeal, IndexedDiscountedProduct } from "../types";
+import {
+  BundleDeal,
+  DealType,
+  IndexedDiscountedProduct,
+  DiscountCalculator,
+} from "../types";
 import segmentProducts from "./segmentProducts";
 
 const isBundleDealApplicable = (
@@ -9,11 +14,10 @@ const isBundleDealApplicable = (
 const isFree = (index: number, upper: number, lower: number) => {
   return index % upper >= lower;
 };
-const applyBundleDeal = (
-  discountedProducts: IndexedDiscountedProduct[],
-  deal: BundleDeal
-): IndexedDiscountedProduct[] => {
-
+const applyBundleDeal: DiscountCalculator<DealType.Bundle> = (
+  discountedProducts,
+  deal
+) => {
   const [validProducts, invalidProducts] = segmentProducts(
     discountedProducts,
     deal.productId

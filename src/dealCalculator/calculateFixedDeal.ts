@@ -1,10 +1,10 @@
-import { IndexedDiscountedProduct, FixedDeal } from "../types";
+import { DiscountCalculator, DealType } from "../types";
 import segmentProducts from "./segmentProducts";
 
-const calculateFixedDeal = (
-  discountedProducts: IndexedDiscountedProduct[],
-  deal: FixedDeal
-): IndexedDiscountedProduct[] => {
+const calculateFixedDeal: DiscountCalculator<DealType.Fixed> = (
+  discountedProducts,
+  deal
+) => {
   const {
     terms: { price },
   } = deal;

@@ -1,7 +1,4 @@
 import React from "react";
-// import Button from "react-bootstrap/Button";
-// import Table from "react-bootstrap/Table";
-// import Jumbotron from "react-bootstrap/Jumbotron";
 import {
   Container,
   Typography,
@@ -20,7 +17,6 @@ import {
 } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 
-// import Collapse from "react-bootstrap/Collapse";
 
 import {
   Customer,
@@ -44,19 +40,11 @@ export type AppViewProps = {
 
 const AppView: React.FC<AppViewProps> = (props: AppViewProps) => {
   return (
-    // <Jumbotron className="app">
     <Container>
       <Box marginY={4}>
         <Typography variant="h2" component="h1" gutterBottom>
           Job Ad checkout
         </Typography>
-        {/* <p>
-          This is a simple hero unit, a simple jumbotron-style component for
-          calling extra attention to featured content or information.
-        </p>
-        <p>
-          <Button variant="primary">Learn more</Button>
-        </p> */}
         <Card>
           <CardContent>
             <Box marginBottom={4}>

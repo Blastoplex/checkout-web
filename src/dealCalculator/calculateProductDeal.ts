@@ -3,11 +3,18 @@ import {
   Deal,
   DealType,
   Product,
-  IndexedDiscountedProduct,
+  DiscountCalculator
 } from "../types";
 import calculateFixedDeal from "./calculateFixedDeal";
 import calculateBundleDeal from "./calculateBundleDeal";
 import mergeDeals from "./mergeDeals";
+
+// Forces all deals to be handled though does not enforce a type on calculator signature.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const dealToCalcMap:Record<DealType, DiscountCalculator<any>> = {
+  [DealType.Bundle]: calculateBundleDeal,
+  [DealType.Fixed]: calculateFixedDeal,
+}
 
 const calculateProductDeal = (
   cart: Product[],
@@ -20,15 +27,7 @@ const calculateProductDeal = (
   }));
 
   const consolidatedDeals = deals
-    .reduce<IndexedDiscountedProduct[][]>((acc, deal) => {
-      if (deal.type === DealType.Bundle) {
-        acc.push(calculateBundleDeal(discountedProducts, deal));
-      }
-      if (deal.type === DealType.Fixed) {
-        acc.push(calculateFixedDeal(discountedProducts, deal));
-      }
-      return acc;
-    }, [])
+    .map((deal) => dealToCalcMap[deal.type](discountedProducts, deal))
     .reduce(mergeDeals, discountedProducts); // Seed with original list to ensure original order.
 
   // Strip index
