@@ -17,7 +17,6 @@ import {
 } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 
-
 import {
   Customer,
   CustomerId,
@@ -56,26 +55,24 @@ const AppView: React.FC<AppViewProps> = (props: AppViewProps) => {
                 select
               >
                 <MenuItem value="unselected">No customer selected</MenuItem>
-                {props.loading ? (
-                  <>
-                    <MenuItem>
-                      <Box width="100%">
-                        <Skeleton />
-                      </Box>
-                    </MenuItem>
-                    <MenuItem>
-                      <Box width="100%">
-                        <Skeleton />
-                      </Box>
-                    </MenuItem>
-                  </>
-                ) : (
-                  props.customers.map((customer) => (
-                    <MenuItem key={customer.id} value={customer.id}>
-                      {customer.name}
-                    </MenuItem>
-                  ))
-                )}
+                {props.loading
+                  ? [
+                      <MenuItem key="first">
+                        <Box width="100%">
+                          <Skeleton />
+                        </Box>
+                      </MenuItem>,
+                      <MenuItem key="second">
+                        <Box width="100%">
+                          <Skeleton />
+                        </Box>
+                      </MenuItem>,
+                    ]
+                  : props.customers.map((customer) => (
+                      <MenuItem key={customer.id} value={customer.id}>
+                        {customer.name}
+                      </MenuItem>
+                    ))}
               </TextField>
             </Box>
             <Box marginBottom={4}>
@@ -83,8 +80,8 @@ const AppView: React.FC<AppViewProps> = (props: AppViewProps) => {
                 Products
               </Typography>
               <TableContainer>
-                <Table aria-label="Job add table">
-                  <TableHead>
+                <Table aria-label="Job ad table">
+                  <TableHead aria-label="Job ad table header">
                     <TableRow>
                       <TableCell>Name</TableCell>
                       <TableCell>Description</TableCell>
@@ -138,8 +135,8 @@ const AppView: React.FC<AppViewProps> = (props: AppViewProps) => {
                   Cart
                 </Typography>
                 <TableContainer>
-                  <Table aria-label="Job add table">
-                    <TableHead>
+                  <Table aria-label="Job cart table">
+                    <TableHead aria-label="Job cart table header">
                       <TableRow>
                         <TableCell>Name</TableCell>
                         <TableCell>Price</TableCell>
@@ -163,6 +160,9 @@ const AppView: React.FC<AppViewProps> = (props: AppViewProps) => {
                 </TableContainer>
               </Box>
             )}
+            <Typography variant="h5" gutterBottom>
+              Total Price: {props.totalPrice}
+            </Typography>
           </CardContent>
         </Card>
       </Box>

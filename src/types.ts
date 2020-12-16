@@ -42,7 +42,7 @@ export type IndexedDiscountedProduct = DiscountedProduct & {
   index: number;
 };
 
-export type DisplayDiscountedProduct = DisplayProduct & {
+export type DisplayDiscountedProduct = DiscountedProduct & {
   displayPrice: DisplayPrice;
   displayDiscountedPrice: DisplayPrice;
 };
