@@ -1,4 +1,5 @@
 import { Action, ActionTypes, State } from "./types";
+import { generate } from "shortid";
 
 export const initialState: State = {
   cart: [],
@@ -14,7 +15,7 @@ const reducer = (state = initialState, action: Action): State => {
     case ActionTypes.addProductToCart:
       return {
         ...state,
-        cart: [...state.cart, action.productId],
+        cart: [...state.cart, { productId: action.productId, entryId: generate() }],
       };
 
     case ActionTypes.updateCustomer:
@@ -22,7 +23,7 @@ const reducer = (state = initialState, action: Action): State => {
         ...state,
         selectedCustomer: action.customerId,
       };
-      
+
     case ActionTypes.successfullyLoaded:
       return {
         ...state,

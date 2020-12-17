@@ -10,7 +10,7 @@ describe("reducer", () => {
       productId: ProductId.Classic,
     };
     const state = reducer(initialState, action);
-    expect(state.cart).toEqual([ProductId.Classic]);
+    expect(state.cart).toEqual([{productId: ProductId.Classic, entryId: expect.any(String)}]);
   });
   it("should handle update Customer action", () => {
     const action: Action = {

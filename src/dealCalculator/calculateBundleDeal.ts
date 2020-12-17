@@ -1,13 +1,13 @@
 import {
   BundleDeal,
   DealType,
-  IndexedDiscountedProduct,
   DiscountCalculator,
+  DiscountedProduct
 } from "../types";
 import segmentProducts from "./segmentProducts";
 
 const isBundleDealApplicable = (
-  validProducts: IndexedDiscountedProduct[],
+  validProducts: DiscountedProduct[],
   deal: BundleDeal
 ) => validProducts.length >= deal.terms.upper;
 

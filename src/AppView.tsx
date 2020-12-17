@@ -107,7 +107,7 @@ const AppView: React.FC<AppViewProps> = (props: AppViewProps) => {
                       </TableRow>
                     ) : (
                       props.products.map((product) => (
-                        <TableRow key={product.id}>
+                        <TableRow key={`add-${product.productId}`}>
                           <TableCell>
                             <strong>{product.name}</strong>
                           </TableCell>
@@ -116,7 +116,7 @@ const AppView: React.FC<AppViewProps> = (props: AppViewProps) => {
                           <TableCell align="right">
                             <Button
                               color="primary"
-                              onClick={() => props.addItemToCart(product.id)}
+                              onClick={() => props.addItemToCart(product.productId)}
                             >
                               Add to cart
                             </Button>
@@ -144,14 +144,14 @@ const AppView: React.FC<AppViewProps> = (props: AppViewProps) => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {props.cart.map((product) => (
-                        <TableRow key={product.id}>
+                      {props.cart.map((entry) => (
+                        <TableRow key={`cart-${entry.entryId}`}>
                           <TableCell>
-                            <strong>{product.name}</strong>
+                            <strong>{entry.name}</strong>
                           </TableCell>
-                          <TableCell>{product.displayPrice}</TableCell>
+                          <TableCell>{entry.displayPrice}</TableCell>
                           <TableCell>
-                            {product.displayDiscountedPrice}
+                            {entry.displayDiscountedPrice}
                           </TableCell>
                         </TableRow>
                       ))}

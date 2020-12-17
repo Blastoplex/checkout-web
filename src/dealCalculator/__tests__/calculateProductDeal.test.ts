@@ -4,22 +4,28 @@ import calculateProductDeal from "../calculateProductDeal";
 describe("calculateProductDeal", () => {
   const products = [
     {
-      id: ProductId.Classic,
+      productId: ProductId.Classic,
       name: "test_classic_name",
       description: "test_classic_description",
       price: 20.0,
+      discountedPrice: 20,
+      entryId: "a",
     },
     {
-      id: ProductId.Classic,
+      productId: ProductId.Classic,
       name: "test_classic_name",
       description: "test_classic_description",
       price: 20.0,
+      discountedPrice: 20,
+      entryId: "b",
     },
     {
-      id: ProductId.Premium,
+      productId: ProductId.Premium,
       name: "test_premium_name",
       description: "test_premium_description",
       price: 30.0,
+      discountedPrice: 30,
+      entryId: "c",
     },
   ];
   const notRelevantDeal: Deal[] = [
@@ -53,25 +59,28 @@ describe("calculateProductDeal", () => {
     it("and deals that arent all applicable, should only appliy where valid", () => {
       const expected = [
         {
-          id: ProductId.Classic,
+          productId: ProductId.Classic,
           name: "test_classic_name",
           description: "test_classic_description",
           price: 20.0,
           discountedPrice: 20.0,
+          entryId: "a",
         },
         {
-          id: ProductId.Classic,
+          productId: ProductId.Classic,
           name: "test_classic_name",
           description: "test_classic_description",
           price: 20.0,
           discountedPrice: 20.0,
+          entryId: "b",
         },
         {
-          id: ProductId.Premium,
+          productId: ProductId.Premium,
           name: "test_premium_name",
           description: "test_premium_description",
           price: 30.0,
           discountedPrice: 10.0,
+          entryId: "c",
         },
       ];
 
@@ -80,102 +89,75 @@ describe("calculateProductDeal", () => {
     it("and deals that are all applicable should apply all deals", () => {
       const expected = [
         {
-          id: ProductId.Classic,
+          productId: ProductId.Classic,
           name: "test_classic_name",
           description: "test_classic_description",
           price: 20.0,
           discountedPrice: 20.0,
+          entryId: "z",
         },
         {
-          id: ProductId.Classic,
+          productId: ProductId.Classic,
           name: "test_classic_name",
           description: "test_classic_description",
           price: 20.0,
           discountedPrice: 20.0,
+          entryId: "a",
         },
         {
-          id: ProductId.Classic,
+          productId: ProductId.Classic,
           name: "test_classic_name",
           description: "test_classic_description",
           price: 20.0,
           discountedPrice: 0.0,
+          entryId: "b",
         },
         {
-          id: ProductId.Premium,
+          productId: ProductId.Premium,
           name: "test_premium_name",
           description: "test_premium_description",
           price: 30.0,
           discountedPrice: 10.0,
+          entryId: "c",
         },
       ];
 
-      expect(calculateProductDeal([products[0], ...products], deals)).toEqual(
-        expected
-      );
+      expect(
+        calculateProductDeal(
+          [{ ...products[0], entryId: "z" }, ...products],
+          deals
+        )
+      ).toEqual(expected);
     });
     it("and deals that are not valid should do nothing.", () => {
       const productsWithDiscount = [
         {
-          id: ProductId.Classic,
+          productId: ProductId.Classic,
           name: "test_classic_name",
           description: "test_classic_description",
           price: 20.0,
           discountedPrice: 20.0,
+          entryId: "a",
         },
         {
-          id: ProductId.Classic,
+          productId: ProductId.Classic,
           name: "test_classic_name",
           description: "test_classic_description",
           price: 20.0,
           discountedPrice: 20.0,
+          entryId: "b",
         },
         {
-          id: ProductId.Premium,
+          productId: ProductId.Premium,
           name: "test_premium_name",
           description: "test_premium_description",
           price: 30.0,
           discountedPrice: 30.0,
+          entryId: "c",
         },
       ];
       expect(calculateProductDeal(products, notRelevantDeal)).toEqual(
         productsWithDiscount
-      );
-    });
-    it("deals applied should retain original cart order", () => {
-      const expected = [
-        {
-          id: ProductId.Classic,
-          name: "test_classic_name",
-          description: "test_classic_description",
-          price: 20.0,
-          discountedPrice: 20.0,
-        },
-        {
-          id: ProductId.Classic,
-          name: "test_classic_name",
-          description: "test_classic_description",
-          price: 20.0,
-          discountedPrice: 20.0,
-        },
-
-        {
-          id: ProductId.Premium,
-          name: "test_premium_name",
-          description: "test_premium_description",
-          price: 30.0,
-          discountedPrice: 10.0,
-        },
-        {
-          id: ProductId.Classic,
-          name: "test_classic_name",
-          description: "test_classic_description",
-          price: 20.0,
-          discountedPrice: 0.0,
-        },
-      ];
-
-      expect(calculateProductDeal([...products, products[0]], deals)).toEqual(
-        expected
       );
     });
   });

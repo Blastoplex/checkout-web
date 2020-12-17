@@ -2,6 +2,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Assumptions
+
+ - In this context theres a design system that is responsible for rendering the view layer. Through this lense I have made my view as simple as possible. (I have added a loading state, because I like the skeleton component but really that could be refactored out also.)
+ - In an ideal world the selection of the customer would be through user acess and privelages, in this case we are acting as a user that can checkout as any customer. 
+ - Peferably the computation of the discounts on the cart and would be managed server side, this would ensure the correctness and consistency of the computation as the computation would also be used in the backend to either validate the purchace or recalculate it.
+ - Potentially there will be more deal types and more products
+ - Deals can only apply discounts to indiviual items in the cart eg - A deal that applies a fixed discount after breaching a total price of x will need a little bit of work in the `mergeDeals.ts` file.
+ - Checkout data will be aquired through an API call which is why `getCheckoutData` is returning a promise
+ - Its not necesary to have a remove from cart button. 
+ - A deal will only ever change the price of a product. Eg there wont be a case where buying an item at 10% discount with generate customer loyalty points
+
 ## Available Scripts
 
 In the project directory, you can run:

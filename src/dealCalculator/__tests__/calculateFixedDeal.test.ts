@@ -4,24 +4,24 @@ import calculateFixedDeal from "../calculateFixedDeal";
 describe("calculateFixedDeal", () => {
   const products = [
     {
-      index: 0,
-      id: ProductId.Classic,
+      entryId: "0",
+      productId: ProductId.Classic,
       name: "test_classic_name",
       description: "test_classic_description",
       price: 20.0,
       discountedPrice: 20.0,
     },
     {
-      index: 1,
-      id: ProductId.Classic,
+      entryId: "1",
+      productId: ProductId.Classic,
       name: "test_classic_name",
       description: "test_classic_description",
       price: 20.0,
       discountedPrice: 20.0,
     },
     {
-      index: 2,
-      id: ProductId.Premium,
+      entryId: "2",
+      productId: ProductId.Premium,
       name: "test_premium_name",
       description: "test_premium_description",
       price: 30.0,
@@ -39,24 +39,24 @@ describe("calculateFixedDeal", () => {
     it("that arent all applicable to deal, should only appliy where valid", () => {
       const expected = [
         {
-          index: 0,
-          id: ProductId.Classic,
+          entryId: "0",
+          productId: ProductId.Classic,
           name: "test_classic_name",
           description: "test_classic_description",
           price: 20.0,
           discountedPrice: 20.0,
         },
         {
-          index: 1,
-          id: ProductId.Classic,
+          entryId: "1",
+          productId: ProductId.Classic,
           name: "test_classic_name",
           description: "test_classic_description",
           price: 20.0,
           discountedPrice: 20.0,
         },
         {
-          index: 2,
-          id: ProductId.Premium,
+          entryId: "2",
+          productId: ProductId.Premium,
           name: "test_premium_name",
           description: "test_premium_description",
           price: 30.0,
@@ -69,8 +69,8 @@ describe("calculateFixedDeal", () => {
     it("that are all applicable to deal, should apply to all", () => {
       const expected = [
         {
-          index: 2,
-          id: ProductId.Premium,
+          entryId: "2",
+          productId: ProductId.Premium,
           name: "test_premium_name",
           description: "test_premium_description",
           price: 30.0,

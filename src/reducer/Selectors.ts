@@ -5,7 +5,7 @@ import {
   DisplayPrice,
   DisplayProduct,
   Product,
-  ProductId,
+  CartItem,
 } from "../types";
 import calculatePoductDeal from "../dealCalculator/calculateProductDeal";
 
@@ -27,19 +27,28 @@ const addDisplayPriceToDiscountedProduct = (product: DiscountedProduct) => ({
 export const getProductsForDisplay = (state: State): DisplayProduct[] =>
   state.products.map(addDisplayPriceToProduct);
 
-export const getPopulatedCartWithProducts = (
-  cart: ProductId[],
+export const getBaseDiscountCartWithProducts = (
+  cart: CartItem[],
   products: Product[]
-): Product[] => {
-  return cart
-    .map((productId) => products.find((product) => product.id == productId))
-    .filter((product) => !!product) as Product[]; //Make sure to filter out any results that cant be found in products.
+): DiscountedProduct[] => {
+  const productsByProductId = products.reduce((mapById, product) => {
+    mapById[product.productId] = product;
+    return mapById;
+  }, {} as { [key: string]: Product });
+  return cart.map((cart) => ({
+    productId: productsByProductId[cart.productId].productId,
+    name: productsByProductId[cart.productId].name,
+    description: productsByProductId[cart.productId].description,
+    discountedPrice: productsByProductId[cart.productId].price,
+    price: productsByProductId[cart.productId].price,
+    entryId: cart.entryId,
+  }));
 };
 
 export const getCartForDisplay = (
   state: State
 ): [DisplayDiscountedProduct[], DisplayPrice] => {
-  const cart = getPopulatedCartWithProducts(state.cart, state.products);
+  const cart = getBaseDiscountCartWithProducts(state.cart, state.products);
   const dealForSelectedCustomer = state.priceDealMap[state.selectedCustomer];
   const discountedCart = calculatePoductDeal(cart, dealForSelectedCustomer).map(
     addDisplayPriceToDiscountedProduct

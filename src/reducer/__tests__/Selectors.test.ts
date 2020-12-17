@@ -7,7 +7,7 @@ describe("Selectors", () => {
     it("should return products with formatted currency", () => {
       const products = [
         {
-          id: ProductId.Classic,
+          productId: ProductId.Classic,
           name: "test_classic_name",
           description: "test_classic_description",
           price: 20.0,
@@ -15,7 +15,7 @@ describe("Selectors", () => {
       ];
       const expected = [
         {
-          id: ProductId.Classic,
+          productId: ProductId.Classic,
           name: "test_classic_name",
           description: "test_classic_description",
           price: 20.0,
@@ -33,13 +33,13 @@ describe("Selectors", () => {
     it("should return products with formatted currency and total price", () => {
       const products = [
         {
-          id: ProductId.Classic,
+          productId: ProductId.Classic,
           name: "test_classic_name",
           description: "test_classic_description",
           price: 20.0,
         },
       ];
-      const cart = [ProductId.Classic];
+      const cart = [{productId: ProductId.Classic, entryId: 'a'}];
       const selectedCustomer = "abc";
       const deal: Deal = {
         type: DealType.Fixed,
@@ -51,13 +51,14 @@ describe("Selectors", () => {
       const priceDealMap = { [selectedCustomer]: [deal] };
       const expected = [
         {
-          id: ProductId.Classic,
+          productId: ProductId.Classic,
           name: "test_classic_name",
           description: "test_classic_description",
           price: 20.0,
           displayPrice: "A$20.00",
           discountedPrice: 10,
           displayDiscountedPrice: "A$10.00",
+          entryId: "a",
         },
       ];
       const resultProducts = getCartForDisplay({

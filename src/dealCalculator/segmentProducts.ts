@@ -1,12 +1,12 @@
-import { IndexedDiscountedProduct, ProductId } from "../types";
+import { DiscountedProduct, ProductId } from "../types";
 
 const segmentProducts = (
-  discountedProducts: IndexedDiscountedProduct[],
+  discountedProducts: DiscountedProduct[],
   dealProduct: ProductId
-):[IndexedDiscountedProduct[], IndexedDiscountedProduct[]] =>
-  discountedProducts.reduce<[IndexedDiscountedProduct[], IndexedDiscountedProduct[]]>(
+):[DiscountedProduct[], DiscountedProduct[]] =>
+  discountedProducts.reduce<[DiscountedProduct[], DiscountedProduct[]]>(
     (acc, product) => {
-      if (product.id === dealProduct) {
+      if (product.productId === dealProduct) {
         acc[0].push(product);
       } else {
         acc[1].push(product);

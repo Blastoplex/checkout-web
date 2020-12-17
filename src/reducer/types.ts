@@ -5,6 +5,7 @@ import {
   ApiData,
   Product,
   ProductId,
+  CartItem,
 } from "../types";
 
 export enum ActionTypes {
@@ -20,7 +21,7 @@ export type Action =
   | { type: ActionTypes.updateCustomer; customerId: CustomerId };
 
 export interface State {
-  cart: ProductId[];
+  cart: CartItem[];
   products: Product[];
   customers: Customer[];
   selectedCustomer: CustomerId;

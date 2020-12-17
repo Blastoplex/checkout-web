@@ -4,24 +4,24 @@ import segmentProducts from "../segmentProducts";
 describe("segmentProducts", () => {
   const fixture = [
     {
-      id: ProductId.Premium,
-      index: 0,
+      productId: ProductId.Premium,
+      entryId: '0',
       name: "product_name",
       description: "product_description",
       price: 2.0,
       discountedPrice: 10.0,
     },
     {
-      id: ProductId.StandOut,
-      index: 1,
+      productId: ProductId.StandOut,
+      entryId: '1',
       name: "product_name-1",
       description: "product_description-1",
       price: 21.0,
       discountedPrice: 11.0,
     },
     {
-      id: ProductId.Premium,
-      index: 2,
+      productId: ProductId.Premium,
+      entryId: '2',
       name: "product_name-2",
       description: "product_description-2",
       price: 22.0,
@@ -56,16 +56,16 @@ describe("segmentProducts", () => {
   describe("given a list of a single type discounted product", () => {
     const singleFixture = [
       {
-        id: ProductId.Premium,
-        index: 0,
+        productId: ProductId.Premium,
+        entryId: '0',
         name: "product_name",
         description: "product_description",
         price: 2.0,
         discountedPrice: 10.0,
       },
       {
-        id: ProductId.Premium,
-        index: 2,
+        productId: ProductId.Premium,
+        entryId: '2',
         name: "product_name-2",
         description: "product_description-2",
         price: 22.0,

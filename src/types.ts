@@ -24,10 +24,15 @@ export enum ProductId {
 }
 
 export interface Product {
-  id: ProductId;
+  productId: ProductId;
   name: string;
   description: string;
   price: Price;
+}
+
+export type CartItem = {
+  productId: ProductId,
+  entryId: string
 }
 
 export type DisplayProduct = Product & {
@@ -35,11 +40,8 @@ export type DisplayProduct = Product & {
 };
 
 export type DiscountedProduct = Product & {
+  entryId: string
   discountedPrice: Price;
-};
-
-export type IndexedDiscountedProduct = DiscountedProduct & {
-  index: number;
 };
 
 export type DisplayDiscountedProduct = DiscountedProduct & {
@@ -87,6 +89,6 @@ export type DealTypeToDealMap = {
 }
 
 export type DiscountCalculator<T extends keyof DealTypeToDealMap> = (
-  discountedProducts: IndexedDiscountedProduct[],
+  discountedProducts: DiscountedProduct[],
   deal: DealTypeToDealMap[T]
-) => IndexedDiscountedProduct[];
+) => DiscountedProduct[];

@@ -1,12 +1,12 @@
-import { IndexedDiscountedProduct } from "../types";
+import { DiscountedProduct } from "../types";
 
 const mergeDeals = (
-  existingDiscountedProducts: IndexedDiscountedProduct[],
-  newDiscountedProduct: IndexedDiscountedProduct[] = []
-): IndexedDiscountedProduct[] =>
+  existingDiscountedProducts: DiscountedProduct[],
+  newDiscountedProduct: DiscountedProduct[] = []
+): DiscountedProduct[] =>
   existingDiscountedProducts.map((existingDiscountedProduct) => {
     const newProduct = newDiscountedProduct.find(
-      (product) => product.index == existingDiscountedProduct.index
+      (product) => product.entryId == existingDiscountedProduct.entryId
     );
 
     if (newProduct) {
