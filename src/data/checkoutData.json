@@ -11,6 +11,10 @@
     {
       "id": "3",
       "name": "MYER"
+    },
+    {
+      "id": "4",
+      "name": "Jora"
     }
   ],
   "products": [
@@ -67,6 +71,24 @@
         "productId": "PREMIUM",
         "terms": {
           "price": 389.99
+        }
+      },
+      {
+        "type": "THRESHOLD",
+        "productId": "CLASSIC",
+        "terms": {
+          "price": 249.99,
+          "threshold": 3
+        }
+      }
+    ],
+    "4": [
+      {
+        "type": "THRESHOLD",
+        "productId": "PREMIUM",
+        "terms": {
+          "price": 379.99,
+          "threshold": 4
         }
       }
     ]

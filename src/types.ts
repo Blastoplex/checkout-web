@@ -56,6 +56,7 @@ export type DisplayDiscountedProduct = DiscountedProduct & {
 export enum DealType {
   Bundle = "BUNDLE",
   Fixed = "FIXED",
+  Threshold = "THRESHOLD",
 }
 
 export interface BundleDeal {
@@ -75,7 +76,17 @@ export interface FixedDeal {
   };
 }
 
-export type Deal = BundleDeal | FixedDeal;
+export interface ThresholdDeal {
+  type: DealType.Threshold;
+  productId: ProductId;
+  terms: {
+    threshold: number;
+    price: number;
+  };
+}
+
+
+export type Deal = BundleDeal | FixedDeal | ThresholdDeal;
 
 export interface ApiData {
   products: Product[];
@@ -86,6 +97,7 @@ export interface ApiData {
 export type DealTypeToDealMap = {
   [DealType.Bundle]: BundleDeal
   [DealType.Fixed]: FixedDeal
+  [DealType.Threshold]: ThresholdDeal
 }
 
 export type DiscountCalculator<T extends keyof DealTypeToDealMap> = (

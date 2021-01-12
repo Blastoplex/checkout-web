@@ -6,6 +6,7 @@ import {
 } from "../types";
 import calculateFixedDeal from "./calculateFixedDeal";
 import calculateBundleDeal from "./calculateBundleDeal";
+import calculateThresholdDeal from "./calculateThresholdDeal";
 import mergeDeals from "./mergeDeals";
 
 // Forces all deals to be handled though does not enforce a type on calculator signature.
@@ -13,6 +14,7 @@ import mergeDeals from "./mergeDeals";
 const dealToCalcMap: Record<DealType, DiscountCalculator<any>> = {
   [DealType.Bundle]: calculateBundleDeal,
   [DealType.Fixed]: calculateFixedDeal,
+  [DealType.Threshold]: calculateThresholdDeal,
 };
 
 const calculateProductDeal = (
