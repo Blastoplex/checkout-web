@@ -49,7 +49,8 @@ describe("AppView", () => {
           products: [],
           cart: [
             {
-              id: ProductId.Classic,
+              entryId: "a",
+              productId: ProductId.Classic,
               name: "Classic",
               description: "A classic ad",
               price: 50,
@@ -74,7 +75,8 @@ describe("AppView", () => {
           products: [],
           cart: [
             {
-              id: ProductId.Classic,
+              entryId: "a",
+              productId: ProductId.Classic,
               name: "Classic",
               description: "A classic ad",
               price: 50,
@@ -106,7 +108,7 @@ describe("AppView", () => {
         customers: [],
         products: [
           {
-            id: ProductId.Classic,
+            productId: ProductId.Classic,
             name: "Classic",
             description: "A classic ad",
             price: 50,
@@ -129,7 +131,7 @@ describe("AppView", () => {
         customers: [],
         products: [
           {
-            id: ProductId.Classic,
+            productId: ProductId.Classic,
             name: "Classic",
             description: "A classic ad",
             price: 50,
